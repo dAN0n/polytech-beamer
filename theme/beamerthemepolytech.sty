@@ -1,0 +1,25 @@
+\mode<presentation>
+
+	% Необходимые пакеты
+	\RequirePackage{ifthen}		% Условия (соотношение экрана)
+	\RequirePackage{pgfpages}	% Для заметок
+	\RequirePackage{tikz}		% Отрисовка фона
+	\RequirePackage{textpos}	% Размещение текста
+	\RequirePackage{xcolor}		% Кастомные цвета
+	% \RequirePackage[showboxes]{textpos}
+
+	% Составляющие темы
+	\RequirePackage{theme/beamerinnerthemepolytech}		% Тема с фонами и титульником
+	\RequirePackage{theme/beamerouterthemepolytech}		% Тема с заголовком слайда и отступом от плашки
+	\RequirePackage{theme/beamercolorthemepolytech}		% Цвета
+	\RequirePackage{theme/envpolytech}					% Остальные пакеты и настройки
+
+	\setbeamertemplate{navigation symbols}{}			% Отключение кнопок внизу
+
+	\def\beamer@framenotesbegin{						% Исправление бага с pgfpages
+		\usebeamercolor[fg]{normal text}
+		\gdef\beamer@noteitems{} 
+		\gdef\beamer@notes{}
+	}
+
+\mode<all>

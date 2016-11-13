@@ -1,0 +1,303 @@
+\documentclass{beamer}
+% \documentclass[aspectratio=169]{beamer}
+% \setbeameroption{show notes on second screen=right}
+\usepackage{theme/beamerthemepolytech}
+\wordfont
+
+\title[Example presentation]{An example of a presentation with \LaTeX{} and Beamer}
+\subtitle[Test]{Test subtitle}
+\author[Jeremiah \and Langstrom]{Lori T.~Jeremiah \and Ray B.~Langstrom}
+\date{February 21, 2014}
+
+\begin{document}
+
+% Each slide goes in a frame environment.
+% The first one should be your title page, which is
+% set up automatically by Beamer.
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Some people like to include a table of contents.
+% (I find them tacky; your audience shouldn't need a map!)
+\begin{frame}
+  \frametitle{Contents}
+  \toc
+\end{frame}
+
+\section{Basics}
+% Every frame should have a \frametitle
+\begin{frame}
+  \frametitle{Title of the first frame}
+  This frame has very \textit{\textbf{little}} content.
+
+  \begin{alertblock}{Caution}
+    This example is meant to be used alongside its source!
+    If you are only viewing the PDF, this document will not be useful to you.
+  \end{alertblock}
+  \note{Денис - дурак}
+\end{frame}
+
+\begin{frame}[fragile] % The argument "fragile" protects \verb, which is badly-behaved.
+  \frametitle{Text formatting}
+  Beamer supports the same text-formatting commands as ordinary \LaTeX{}.
+
+  However, for best results, you should use \verb|\alert| instead of \verb|\emph|:
+
+  \begin{itemize}
+  \item \emph{emph text}
+  \item \alert{alert text}
+  \end{itemize}
+
+  \textbf{Bold text} should be avoided; you can't be sure it will be distinct on a projector.
+\end{frame}
+
+\section{Blocks}
+\begin{frame}
+  \frametitle{Use of block environments I}
+  Beamer supports the standard block environments.
+
+  \begin{theorem}
+    You can write theorems.
+  \end{theorem}
+
+  \begin{proof}
+    They can have proofs!
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Use of block environments II}
+  \begin{example}
+    You can also give examples.
+  \end{example}
+
+  \begin{definition}
+    And define \alert{terms}.
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Use of block environments III}
+  \begin{block}{Custom block}
+    You can even create custom blocks!
+  \end{block}
+
+  \begin{exampleblock}{Custom example}
+    And custom example blocks!
+  \end{exampleblock}
+\end{frame}
+
+\section{Math}
+\begin{frame}
+  \frametitle{Using math in Beamer}
+
+  Math works both inline: $x^{2} + y^{2} = z^{2}$
+  and display:
+  \[ \int_{-\infty}^{\infty} e^{-x^{2}} \, \mathrm{d}x = \sqrt{\pi} \]
+\end{frame}
+
+\section{Lists}
+\begin{frame}
+  \frametitle{Lists in Beamer}
+  Beamer also has support for ordered and unordered lists.
+
+  \begin{enumerate}
+  \item An ordered item.
+  \begin{enumerate}
+    \item 1
+    \item 2
+    \item 3
+  \end{enumerate}
+  \item Another ordered item.
+    \begin{itemize}
+    \item An unordered subitem.
+    \item Another unordered subitem.
+    \end{itemize}
+  \item A third ordered item.
+  \end{enumerate}
+\end{frame}
+
+\section{Overlays}
+\begin{frame}
+  \frametitle{Overlay specifications}
+  Beamer allows you to set up animated slides using ``overlays''.
+  Use this with caution---less is more!
+
+  Overlays are created by specifying the numbers of the subslides on which the object should appear.
+\end{frame}
+
+\begin{frame}[fragile] % The "fragile" argument protects \verb, which is badly-behaved
+  \frametitle{Example of overlay with itemize}
+  The following items will appear one at a time.
+  Each is created using the \verb|\item| call shown.
+  \begin{itemize}
+  \item<1-> \verb|\item<1->|
+  \item<2-> \verb|\item<2->|
+  \item<3-> \verb|\item<3->|
+  \item<4-> \verb|\item<4->|
+  \end{itemize}
+\end{frame}
+
+\subsection{Simplified syntax}
+\begin{frame}[fragile]
+  \frametitle{Example of simplified overlay with itemize}
+
+  Beamer supports a simplified syntax for revealing lists one item at a time.
+  \begin{block}{Code}
+  \begin{verbatim}
+\begin{itemize}[<+->]
+  \item First item
+  \item Second item
+  \item Third item
+\end{itemize}
+  \end{verbatim}
+  \end{block}
+
+  \begin{itemize}[<+->]
+    \item First item
+    \item Second item
+    \item Third item
+  \end{itemize}
+\end{frame}
+
+\subsection{Simplified syntax2}
+\begin{frame}[fragile]
+  \frametitle{Example of simplified overlay with text}
+  You can also use a simplified syntax to reveal a slide from top to bottom using \verb|\pause|.
+
+  \pause
+
+  This text will appear only on the second slide.
+\end{frame}
+
+\section{Structure and ToC}
+\begin{frame}[fragile]
+  \frametitle{Document structure}
+  A Beamer presentation can be structured using \verb|\section| and \verb|\subsection|, just like a paper.
+
+  These commands go \alert{between} the slides.
+  They do not change the text on your slides, but they show up in the Table of Contents, and some themes show them in a sidebar or tree.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Tables of contents}
+  Beamer supports automatically building tables of contents.
+
+  \begin{alertblock}{Caution}
+    Be careful how you use the table of contents.
+    Just throwing an outline slide up and then using a minute to read it out is a waste of your audience's time.
+  \end{alertblock}
+\end{frame}
+
+\section{Slide formatting}
+\begin{frame}
+  \frametitle{Multicolumn slides}
+  Beamer supports slides with multiple columns.
+
+  \begin{columns}
+    \column{0.4\textwidth} %Using .4\textwidth leaves some gutter space between the columns, which is good with blocks.
+    \begin{theorem}
+      Here is a theorem.
+    \end{theorem}
+
+    \column{0.4\textwidth}
+    \begin{proof}
+      And here is its proof.
+    \end{proof}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+  \lstset{style=vhdl}
+\begin{lstlisting}[label=lst:VHDL,caption=Описание схемы]
+entity lab2 is
+port(
+  SW0,SW1,SW2,SW3,SW4 : in bit;
+  LED0,LED1,LED2 : out bit;
+  LED3,LED4,LED5 : out boolean
+  );
+end lab2;
+architecture rtl of lab2 is
+  signal TEMP : bit := '0';
+begin
+  LED2 <= '0';
+  temp <= SW0 or SW1;
+  LED1 <= TEMP and SW2;
+  LED0 <= not TEMP;
+  LED3 <= not(SW3 > SW4);
+  LED4 <= not(SW3 = SW4);
+  LED5 <= not(SW3 < SW4);
+end rtl;
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Матлаб}
+  \lstset{style=matlab}
+\begin{lstlisting}[label=lst:VHDL,caption=Описание схемы]
+function [] = Main ()
+clc;
+clear all;                     
+close all;
+initialX = [3; 8]; % Начальная точка  
+% initialX = [11; 4]; %%%%% Вторая начальная точка  
+index = [-31,-34,4,286,388]; % Значения всех аргументов
+e = 0.1;                    
+H = [index(1)*2, index(3); index(3), index(2)*2];         
+% Открытие файла вывода для записи результатов
+fileID = fopen('results.txt', 'wt');
+if (fileID == -1)
+    error('Не удалось открыть файл вывода.');
+    return;
+end
+
+% Функция построение графика метода
+function [] = PlotGraph (v)
+% Область построения
+x_1=2:.1:6;
+x_2=5:.1:9;
+% x_1=4:.1:12; %%%%% Для второй начальной точки                 
+% x_2=3:.1:9;
+[x_1,x_2]=meshgrid(x_1,x_2);
+w=(index(1)*x_1.^2 +index(2)*x_2.^2 + index(3)*x_1.*x_2 + index(4)*x_1 + index(5)*x_2 );
+
+figure;
+hold on;
+contour(x_1,x_2,w,30);
+plot(x, y, '.-k');
+contour(x_1,x_2,w,v);
+xlabel('x1');
+ylabel('x2');
+hold off;
+end
+
+% Функция построения графика сравнения кол-ва итераций
+function [] = PlotIterCountGraph ()
+figure;
+surf(from:1:2*to,from:1:2*to,N);
+xlabel('x1');
+ylabel('x2');
+zlabel('Кол-во итераций');
+colorbar
+
+figure;
+contourf(from:1:2*to,from:1:2*to,N)
+xlabel('x1');
+ylabel('x2');
+c = colorbar;
+c.Label.String = 'Кол-во итераций';
+end
+
+% Вычисление функции и значение её производной
+function [fX, dfX] = derivative(X) 
+% Вычисление значения функции от Х
+fX = index(1) * X(1)^2 + index(2) * X(2)^2 + index(3) * X(1) * X(2) + index(4) * X(1) + index(5) * X(2);
+% Вычисление частных производных по Х1 и Х2 соответственно
+dfX = [index(1)*2 * X(1) + index(3) * X(2) + index(4); index(2)*2 * X(2) + index(3) * X(1) + index(5)];
+end
+\end{lstlisting}
+
+\end{frame}
+
+\end{document}

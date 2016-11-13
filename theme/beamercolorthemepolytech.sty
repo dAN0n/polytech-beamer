@@ -1,0 +1,31 @@
+\mode<presentation>
+
+\definecolor{poly-darker-green}{RGB}{29,94,37}
+\definecolor{poly-dark-green}{RGB}{38,122,48}
+\definecolor{poly-blue}{RGB}{0,119,137}
+\definecolor{poly-green}{RGB}{55,179,74}
+\definecolor{poly-light-green}{RGB}{66,209,83}
+\definecolor{poly-red}{RGB}{133,0,6}
+
+\setbeamercolor*{title page header}{fg=poly-darker-green}
+\setbeamercolor*{author}{fg=poly-darker-green}
+\setbeamercolor*{date}{fg=poly-darker-green}
+\setbeamercolor*{frametitle}{fg=poly-darker-green}
+\setbeamercolor*{item}{fg=poly-green}
+
+\setbeamercolor{block title}{fg=white, bg=poly-darker-green}
+\setbeamercolor{block body}{fg=black, bg=poly-light-green}
+
+\setbeamercolor{block title alerted}{fg=white, bg=poly-red}
+\setbeamercolor{block body alerted}{fg=black, bg=poly-light-green}
+
+\setbeamercolor{block title example}{fg=white, bg=poly-blue}
+\setbeamercolor{block body example}{fg=black, bg=poly-light-green}
+
+\setbeamercolor{normal text}{fg=poly-dark-green}
+\setbeamercolor{caption name}{fg=poly-dark-green}
+
+\pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{	% Убирает градиент между цветами
+  color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(4pt)=(lower.bg)}
+
+\mode<all>

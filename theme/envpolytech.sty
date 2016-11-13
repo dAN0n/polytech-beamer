@@ -1,0 +1,359 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{SPbSTUpresentations}[03/28/2016 SPbSTU reports template v4 clipped for presentations]
+
+% Требует XeTeX!!!
+
+% TODO Попробовать добавить метаданные PDF
+% TODO Попробовать сделать шаблон титульного листа
+
+%% БАЗОВЫЕ ПАКЕТЫ %%
+
+	\RequirePackage[no-math]{fontspec}					% Не использовать шрифты для математики
+	\RequirePackage{xunicode}							% Доступ к разным черточкам для букв
+	\RequirePackage{xltxtra}							% Обработка логотипов \LaTeX и т.д.
+	\RequirePackage{polyglossia}						% Загружает пакет многоязыковой вёрстки
+	\setdefaultlanguage[spelling=modern]{russian}		% Устанавливает главный язык документа
+	\setkeys{russian}{babelshorthands=true}				% babel-like пунктуация
+	\setotherlanguage{english}							% Объявляет второй язык документа
+	\defaultfontfeatures{Ligatures={TeX},%
+	  Renderer=Basic,Mapping=tex-text}					% Свойства шрифтов по умолчанию
+	\let\providelength\relax							% Исправление проблем с этими командами
+	\let\providecounter\relax
+	\RequirePackage{graphicx}							% Для создания pdf
+
+	\graphicspath{{img/}}								% Папка для изображений
+
+%% ШРИФТЫ %%
+
+	\newfontfamily{\cyrillicfontsf}{PTSans}[			% Задаёт шрифт без засечек (основной для презентации)
+	Path = theme/fonts/,
+	Extension = .ttf,
+	UprightFont = *-regular,
+	BoldFont=*-bold,
+	ItalicFont=*-italic,
+	BoldItalicFont=*-bolditalic]
+	\newfontfamily{\cyrillicfonttt}{Courier New}		% Задаёт моноширинный шрифт
+
+	% \setmainfont{} 									% Задаёт основной шрифт документа
+	% \newfontfamily{\cyrillicfontsf}{Arial}
+	% \setsansfont{Arial}                    			% Задаёт шрифт без засечек
+	% \setmonofont{Courier New}                 		% Задаёт моноширинный шрифт
+
+	% Команда \wordfont включает шрифт математики при наличии
+	\newcommand*{\wordfont}{%
+		% Математика Times New Roman стиля (возможно, придется обновить MiKTeX)
+		\IfFileExists{newtxmath.sty}{\RequirePackage{newtxmath}}
+	}
+
+	\RequirePackage{lmodern}					% Набор шрифтов (на всякий случай)
+
+%% МАТЕМАТИКА %%
+
+	\RequirePackage{amsthm,amssymb,amsmath}		% Математические выражения
+	\RequirePackage{mathtools}					% Всякие мелочи для математики
+
+	\RequirePackage{icomma}						% Умная запятая ($2,4$ $2, 4$)
+
+	% Дублирование знаков при переносе в формулах
+	\newcommand*{\hm}[1]{#1\nobreak\discretionary{}%
+		{\hbox{$\mathsurround=0pt #1$}}{}}
+
+	% Русские варианты некоторых математических символов
+	\renewcommand{\epsilon}{\ensuremath{\varepsilon}}
+	\renewcommand{\phi}{\ensuremath{\varphi}}
+	\renewcommand{\kappa}{\ensuremath{\varkappa}}
+	\renewcommand{\le}{\ensuremath{\leqslant}}
+	\renewcommand{\leq}{\ensuremath{\leqslant}}
+	\renewcommand{\ge}{\ensuremath{\geqslant}}
+	\renewcommand{\geq}{\ensuremath{\geqslant}}
+	\renewcommand{\emptyset}{\varnothing}
+
+%% ТЕКСТ И СИМВОЛЫ %%
+
+	\RequirePackage{soulutf8}					% Для пакета soul
+	\RequirePackage{soul} 						% Зачеркивания и прочие модификаторы текста
+	\newfontfamily\SOUL@tt{cmuntt.otf}			% Исправление проблемы с пакетом soul в XeTeX
+	\RequirePackage{cancel} 					% Зачеркивания (диагональные)
+	\RequirePackage{enumerate}					% Расширенные возможности перечислений
+
+%% ЛИСТИНГИ %%
+
+	\RequirePackage{listings}					% Листинги
+	\renewcommand{\lstlistingname}{Листинг}		% Исправление подписи листинга для XeTeX
+	\RequirePackage{verbatim}					% Для простых листингов
+
+%% ОБЩЕЕ ДЛЯ КАРТИНОК/ТАБЛИЦ %%
+
+	\RequirePackage[%
+		labelsep=period,
+		singlelinecheck=false,
+		justification=centering
+	]{caption}									% Для рис. и табл.	
+
+	\RequirePackage{float}						% Используется для опции [H]
+	\RequirePackage{wrapfig}					% Обтекание рисунков и таблиц текстом
+
+	% Настройка subcaption
+	\RequirePackage{subcaption}							% Несколько картинок в одной
+	\renewcommand{\thesubfigure}{\asbuk{subfigure}}		% Русские буквы в подписях subcaption
+	\DeclareCaptionLabelFormat{r-parens}{\textbf{#2)}}	% Стилизация subcaption
+
+	\captionsetup{font=normalsize}				% Основные настройки подписей
+	\captionsetup[sub]{							% Настройки подподписей
+		font=small,								% Сделать шрифт меньше для текста и label
+		% textfont=sl,							% Сделать только текст подписи наклонным
+		labelformat=r-parens}					% Вызов этой настройки
+
+%% ТАБЛИЦЫ %%
+
+	\RequirePackage{multirow}					% Для объединения строк
+	\RequirePackage{multicol}					% Несколько колонок (не только для таблиц)
+	\RequirePackage{tabularx}					% Окружение c опцией x для подгона ширины столбца
+	\RequirePackage{tabulary}					% Окружение для выравнивания по высоте
+	\RequirePackage{spreadtab}					% Окружение с именами ячеек
+	\RequirePackage{array}						% Новые типы столбцов
+	\RequirePackage{longtable}					% Многостраничная таблица
+
+	\RequirePackage{pdflscape}					% Поворот страницы для широких таблиц
+
+	% Определение новых типов столбцов (array): 
+	% P (по центру к верхней части)
+	% M (по центру ячейки)
+	\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+	\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+	\setlength{\extrarowheight}{1pt}			% Увеличение высоты ячеек таблицы (array)
+
+	% Использование \captioncont для "Продолжение таблицы" в зоне \endhead (longtable)
+	\DeclareCaptionLabelFormat{continued}{Продолжение таблицы~#2}
+	\newcommand\captioncont{%
+		\captionsetup{labelformat=continued}
+		\caption[]{}\\
+	}
+
+	\captionsetup[table]{justification=raggedleft}
+	\floatstyle{plaintop}
+	\restylefloat{table}
+
+%% КАРТИНКИ %%
+
+	\captionsetup[figure]{justification=centering}
+	\floatstyle{plain}
+	\restylefloat{figure}
+
+%% ГРАФИКИ %%
+
+	% \RequirePackage{pgfplots}					% Для графиков (сложен и неудобен почти всегда)
+	% \pgfplotsset{compat=1.12}					% Принудительное использование данной версии
+
+%% ЦВЕТОВАЯ ПАЛИТРА %%
+
+	\definecolor{mlgreen}{RGB}{28,172,0}
+	\definecolor{mllilas}{RGB}{170,55,241}
+	\definecolor{vhred}{RGB}{179,0,0}
+	\definecolor{javared}{rgb}{0.6,0,0}
+	\definecolor{javagreen}{rgb}{0.25,0.5,0.35}
+	\definecolor{javapurple}{rgb}{0.5,0,0.35}
+	\definecolor{javadocblue}{rgb}{0.25,0.35,0.75}
+	\definecolor{maroon}{RGB}{128,0,0}
+	\definecolor{darkolivegreen}{RGB}{85,107,47}
+	\definecolor{lbcolor}{rgb}{0.95,0.95,0.95}
+	\definecolor{frameline}{rgb}{0.78,0.78,0.78}
+
+%% СПИСОК ЛИТЕРАТУРЫ %%
+
+	% Требуется 3-4 компиляции:
+	% latex
+	% biber
+	% latex - 1-2 раза
+	
+	% Используется команда \lib для создания библиографии
+
+	% Для создания библиографической базы можно использовать JabRef
+	% Создать область наиболее часто используемых полей для заполнения можно, добавив в меню
+	% Options -> Set up general fields следующие строки (без %):
+	% biber:title;author;year;publisher;address;language;langid;pagetotal;media;url;urldate;bibtexkey
+	% biber_misc:pages;note;editor;translator;edition;version;volumes;books;parts
+
+	% Подробнее о ГОСТ стиле: https://www.ctan.org/pkg/biblatex-gost
+
+	\RequirePackage{csquotes}					% Цитирование, используется biblatex
+	\RequirePackage[%
+		autolang=other,							% Язык
+		bibencoding=utf8,						% Кодировка
+		sorting=none,							% Name,Title,Year или sorting=none
+		maxbibnames=3,							% Максимальное число авторов
+		minbibnames=2,							% Число авторов, отображаемое при сокращении
+		style=gost-numeric,						% Стиль
+		backend=biber,							% Использование biber вмето BiBTeX
+		% backref,								% Указание на место цитирования
+		% backrefstyle=two						% Компрессия страниц указаний на место цитирования
+	]{biblatex}									% Библиография
+
+%% ДРУГИЕ СПИСКИ %%
+
+	% Команды \lib, \toc
+
+	\newcommand*{\lib}[1][Список литературы]{% 
+		\printbibliography[title=#1]
+	}
+
+	\newcommand*{\toc}[1][СОДЕРЖАНИЕ]{%
+		\renewcommand\contentsname{#1}
+			\tableofcontents
+	}
+
+%% НАСТРОЙКИ ПАКЕТА LISTINGS %%
+
+	% Костыли для русского языка в listings
+		\lstset{
+			extendedchars=true,
+			keepspaces=true,
+		}
+
+	\begingroup
+		\catcode0=12 %
+		\g@addto@macro\lst@DefEC{%
+			\lst@CCECUse\lst@ProcessLetter
+			абвгдеёжзийклмнопрстуфхцчшщъыьэюя%	% Добавление русских символов (XeTeX)
+			АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ%
+			^^00%								% Маркер завершения
+		}%
+	\endgroup
+
+	% Общие настройки
+	\lstset{
+		basicstyle=\tiny\ttfamily,				% Размер и начертание шрифта для подсветки кода
+		numbers=left,							% Нумерация строк (слева/справа)
+		numberstyle=\tiny\color{black},			% Размер шрифта для номеров строк	
+		stepnumber=2,							% Шаг между двумя номерами строк
+		numbersep=5pt,							% Расстояние номера строки до кода
+		firstnumber=1,							% Установка номера первой строки 1 (решает проблему неправильного шага строк)
+		numberfirstline=true,					% Подсветка номера первой строки в листинге
+		columns=flexible,						% Выравнивание столбцов (убирает ложные пробелы)
+		frame=single,							% Рамка
+		breaklines=true,						% Автоперенос строк
+		captionpos=b,							% Размещение подписи
+		showstringspaces=false,					% Отображение пробелов
+		breakatwhitespace=false,				% Переносить строки только если есть пробел
+		backgroundcolor=\color{white},			% Цвет фона подсветки
+		identifierstyle=\color{black},			% Цвет обычного кода
+		emphstyle=[1]\color{black},				% Указание цвета для переопрееделения
+		backgroundcolor=\color{lbcolor},		% Цвет фона
+		rulecolor=\color{frameline},			% Цвет рамки
+		xleftmargin=10pt,						% Отступы для рамки
+		xrightmargin=-10pt
+	}
+
+	% MATLAB
+	\lstdefinestyle{matlab}{
+		language=Matlab,						% Язык для подсветки
+		tabsize=4,								% Количество пробелов для Tab
+		morekeywords={matlab2tikz},				% Дополнительные ключевые слова
+		keywordstyle=\color{blue}\bfseries,		% Цвет ключевых слов
+		stringstyle=\color{mllilas},			% Цвет стрингов
+		commentstyle=\color{mlgreen},			% Цвет комментариев
+		identifierstyle=\color{black},			% Цвет обычного кода
+		emphstyle=[1]\color{black},				% Указание цвета для переопрееделения
+	}
+
+	% VHDL
+	\lstdefinestyle{vhdl}{
+		language=VHDL,							% Язык для подсветки
+		tabsize=3,								% Количество пробелов для Tab
+		keywordstyle=\color{blue}\bfseries,		% Цвет ключевых слов
+		morekeywords=[2]{						% Дополнительные ключевые слова
+			STD_LOGIC_VECTOR,STD_LOGIC,IEEE,STD_LOGIC_1164,
+			std_logic_vector,std_logic,ieee,std_logic_1164,
+			NUMERIC_STD,STD_LOGIC_ARITH,STD_LOGIC_UNSIGNED,
+			numeric_std,std_logic_arith,std_logic_unsigned,
+			BIT,BOOLEAN,BIT_VECTOR,INTEGER,STRING,
+			bit,boolean,bit_vector,integer,string,
+		},
+		keywordstyle=[2]\color{vhred}\bfseries,	% Цвет дополнительных ключевых слов
+		morekeywords=[3]{event,EVENT},			% Дополнительные ключевые слова (работает плохо)
+		keywordstyle=[3]{\color{blue}},			% Цвет дополнительных ключевых слов
+		stringstyle=\color{mllilas},			% Цвет стрингов ""
+		morestring=[m][\color{vhred}]',			% Цвет стрингов '' (работает плохо, разобраться)
+		commentstyle=\color{mlgreen},			% Цвет комментариев
+		identifierstyle=\color{black},			% Цвет обычного кода
+		emph=[1]{or,and,not,OR,AND,NOT},		% Переопределение цвета дефолтных ключевых слов
+		emphstyle=[1]\color{vhred}\bfseries,	% Указание цвета для переопрееделения
+	}
+
+	\lstdefinestyle{verilog}{
+		language=Verilog,
+		morekeywords={},
+		keywordstyle=\color{blue}\bfseries,
+		morekeywords=[2]{1},
+		keywordstyle=[2]{\color{black}},
+		stringstyle=\color{mllilas},
+		commentstyle=\color{mlgreen},
+	}
+
+	\lstdefinestyle{latex}{
+		language={[LaTeX]TeX},					% Язык для подсветки
+		tabsize=4,								% Количество пробелов для Tab
+		keywordstyle=\color{blue}\bfseries,		% Цвет ключевых слов
+		morekeywords=[2]{						% Дополнительные ключевые слова
+			ProvidesPackage,RequirePackage,
+			subsection,subsubsection,phantomsection,
+			printbibliography,tableofcontents,listoffigures,
+			listoftables,lstlistoflistings,ifthenelse,
+			Asbuk,asbuk,
+		},
+		keywordstyle=[2]{\color{blue}},			% Цвет дополнительных ключевых слов
+		commentstyle=\color{mlgreen},			% Цвет комментариев
+		identifierstyle=\color{black},			% Цвет обычного кода
+		emphstyle=[1]\color{black},				% Указание цвета для переопрееделения
+	}
+
+	\lstdefinestyle{java}{
+		language=Java,
+		tabsize=4,
+		keywordstyle=\color{javapurple}\bfseries,
+		stringstyle=\color{javared},
+		commentstyle=\color{javagreen},
+		morecomment=[s][\color{javadocblue}]{/**}{*/},
+		identifierstyle=\color{black},
+		emphstyle=[1]\color{black},
+	}
+
+	\lstdefinelanguage{XML}{
+		morestring=[b]",
+		moredelim=[s][\bfseries\color{maroon}]{<}{\ },
+		moredelim=[s][\bfseries\color{maroon}]{</}{>},
+		moredelim=[l][\bfseries\color{maroon}]{/>},
+		moredelim=[l][\bfseries\color{maroon}]{>},
+		morecomment=[s]{<?}{?>},
+		morecomment=[s]{<!--}{-->},
+		commentstyle=\color{darkolivegreen},
+		stringstyle=\color{blue},
+		identifierstyle=\color{red},
+		emphstyle=[1]\color{black},
+	}
+
+	\lstdefinestyle{xml}{
+		language=XML,
+		tabsize=2,
+	}
+
+	\lstdefinelanguage
+		[SH51]{Assembler}						% add a "Shell51" dialect of Assembler
+		[x86masm]{Assembler}					% based on the "x86masm" dialect
+		{
+		morekeywords={
+			mov,movx,movc,push,pop,xch,xchd,swap,
+			add,addc,subb,da,inc,dec,mul,div,anl,orl,xrl,clr,cpl,rl,rlc,rr,rrc,setb,
+			jb,jbc,jnb,jc,jnc,ljmp,ajmp,sjmp,jmp,lcall,acall,ret,reti,jz,jnz,jc,jnc,djnz,cjne,
+			MOV,MOVX,MOVC,PUSH,POP,XCH,XCHD,SWAP,
+			ADD,ADDC,SUBB,DA,INC,DEC,MUL,DIV,ANL,ORL,XRL,CLR,CPL,RL,RLC,RR,RRC,SETB,
+			JB,JBC,JNB,JC,JNC,LJMP,AJMP,SJMP,JMP,LCALL,ACALL,RET,RETI,JZ,JNZ,JC,JNC,DJNZ,CJNE,
+		},
+		deletekeywords=[2]{end}
+	}
+
+	\lstdefinestyle{sh51}{
+		language={[SH51]Assembler},
+		tabsize=8,
+	}

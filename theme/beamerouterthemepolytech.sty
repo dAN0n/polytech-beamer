@@ -1,0 +1,38 @@
+\mode<presentation>
+
+\setbeamertemplate{items}[circle]
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+% Название слайда
+\defbeamertemplate*{frametitle}{polytech}[1][]{
+    \ifthenelse{\lengthtest{\beamer@paperwidth=12.80cm}}{ 
+        \vskip1cm%
+        \begin{textblock*}{10.6cm}(0cm,-0.5cm)
+        \begin{beamercolorbox}[wd=10.6cm,leftskip=2.6cm,sep=2pt,center]{frametitle}
+        \ifx\insertframesubtitle\@empty% 
+            \usebeamerfont{frametitle}\textbf{\insertframetitle}\par%
+        \else%
+            \usebeamerfont{frametitle}\textbf{\insertframetitle}\par%
+            \usebeamerfont{frametitle}\insertframesubtitle\par%
+        \fi
+        \end{beamercolorbox}
+        \end{textblock*} 
+    }{
+        \vskip1cm%
+        \begin{textblock*}{14.2cm}(-0.3cm,-0.5cm)
+        \begin{beamercolorbox}[wd=14.2cm,leftskip=2.6cm,sep=2pt,center]{frametitle}
+        \ifx\insertframesubtitle\@empty% 
+            \usebeamerfont{frametitle}\textbf{\insertframetitle}\par%
+        \else%
+            \usebeamerfont{frametitle}\textbf{\insertframetitle}\par%
+            \usebeamerfont{frametitle}\insertframesubtitle\par%
+        \fi
+        \end{beamercolorbox}
+        \end{textblock*}     
+    }
+}
+
+\setbeamersize{sidebar width left=0.9cm}    % Отступ от плашки
+
+\mode<all>

@@ -1,0 +1,85 @@
+\mode<presentation>
+
+% Фон
+\setbeamertemplate{background}{
+	\ifthenelse{\lengthtest{\beamer@paperwidth=12.80cm}}{	% 4:3
+		\begin{tikzpicture}[remember picture,overlay]
+			\ifnum\thepage=1\relax%
+				\node[xshift=53pt,yshift=0pt] at (current page.west){
+					\includegraphics[height=1.015\textheight]{theme/res/titlebgleft}
+				};
+				\node[xshift=-17pt,yshift=0pt] at (current page.east){
+					\includegraphics[height=1.015\textheight]{theme/res/titlebgright}
+				};
+				\node[xshift=37pt,yshift=-30pt] at (current page.north){
+				\includegraphics[width=1\textwidth]{theme/res/logo}
+				};
+			\fi
+			\ifnum\thepage>1\relax%
+				\node[xshift=23pt,yshift=0pt] at (current page.west){
+					\includegraphics[height=1.015\textheight]{theme/res/framebgleft}
+				};
+			\fi
+		\end{tikzpicture}
+	}{														% 16:9
+		\begin{tikzpicture}[remember picture,overlay]
+			\ifnum\thepage=1\relax%
+				\node[xshift=50pt,yshift=0pt] at (current page.west){
+					\includegraphics[height=1.015\textheight]{theme/res/titlebgleft}
+				};
+				\node[xshift=-16pt,yshift=0pt] at (current page.east){
+					\includegraphics[height=1.015\textheight]{theme/res/titlebgright}
+				};
+				\node[xshift=37pt,yshift=-30pt] at (current page.north){
+				\includegraphics[width=1\textwidth]{theme/res/logo}
+				};
+			\fi
+			\ifnum\thepage>1\relax%
+				\node[xshift=21pt,yshift=0pt] at (current page.west){
+					\includegraphics[height=1.015\textheight]{theme/res/framebgleft}
+				};
+			\fi
+		\end{tikzpicture}
+	}
+}
+
+% Титульный лист
+\defbeamertemplate*{title page}{polytech}[1][]{
+	\ifthenelse{\lengthtest{\beamer@paperwidth=12.80cm}}{	% 4:3
+		\begin{textblock*}{7.7cm}(1.9cm,0.5cm)
+			\begin{beamercolorbox}[wd=7.7cm,leftskip=2.6cm,sep=2pt,center,#1]{title page header}
+				\usebeamerfont{title}\textbf{\inserttitle}\par%
+				\usebeamerfont{title}\insertsubtitle\par%
+			\end{beamercolorbox}
+		\end{textblock*} 
+		\vfill
+		\begin{textblock*}{7.7cm}(1.9cm,3cm)
+			\begin{beamercolorbox}[wd=7.7cm,leftskip=2.6cm,sep=2pt,right,#1]{author}
+				\usebeamerfont{author}\insertauthor%
+			\end{beamercolorbox}
+			\begin{beamercolorbox}[wd=7.7cm,leftskip=2.6cm,sep=2pt,right,#1]{date}
+				\usebeamerfont{date}\insertdate%
+			\end{beamercolorbox}
+		\end{textblock*}
+		\vskip0.25cm
+	}{														% 16:9
+		\begin{textblock*}{11.2cm}(1.7cm,0.5cm)
+			\begin{beamercolorbox}[wd=11.2cm,leftskip=2.6cm,sep=2pt,center,#1]{title page header}
+				\usebeamerfont{title}\textbf{\inserttitle}\par%
+				\usebeamerfont{title}\insertsubtitle\par%
+			\end{beamercolorbox}
+		\end{textblock*} 
+		\vfill
+		\begin{textblock*}{11.2cm}(1.7cm,3cm)
+			\begin{beamercolorbox}[wd=11.2cm,leftskip=2.6cm,sep=2pt,right,#1]{author}
+				\usebeamerfont{author}\insertauthor%
+			\end{beamercolorbox}
+			\begin{beamercolorbox}[wd=11.2cm,leftskip=2.6cm,sep=2pt,right,#1]{date}
+				\usebeamerfont{date}\insertdate%
+			\end{beamercolorbox}
+		\end{textblock*}
+		\vskip0.45cm
+	}
+}
+
+\mode<all>
