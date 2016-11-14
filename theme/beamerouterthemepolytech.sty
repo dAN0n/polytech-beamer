@@ -3,6 +3,7 @@
 \setbeamertemplate{items}[circle]
 \setbeamertemplate{sections/subsections in toc}[square]
 \setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{frametitle continuation}[from second][(\insertcontinuationcount)]
 
 % Название слайда
 \defbeamertemplate*{frametitle}{polytech}[1][]{
@@ -33,6 +34,16 @@
     }
 }
 
-\setbeamersize{sidebar width left=0.9cm}    % Отступ от плашки
+\setbeamersize{sidebar width left=0.9cm}        % Отступ от плашки
+\setbeamersize{text margin right=5pt}           % Отступ справа для текста
+
+\addtobeamertemplate{block begin}{%             % Отступ справа для блоков
+    \setlength{\textwidth}{0.98\textwidth}}{}
+
+\addtobeamertemplate{block alerted begin}{%
+    \setlength{\textwidth}{0.98\textwidth}}{}
+
+\addtobeamertemplate{block example begin}{%
+    \setlength{\textwidth}{0.98\textwidth}}{}
 
 \mode<all>

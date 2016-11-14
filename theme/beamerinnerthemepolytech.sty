@@ -43,13 +43,19 @@
 	}
 }
 
+\newcommand*{\bottitle}[1]{\gdef\@bottitle{\protecting{#1}}}
+\newcommand*{\@bottitle}{0}
+
 % Титульный лист
 \defbeamertemplate*{title page}{polytech}[1][]{
 	\ifthenelse{\lengthtest{\beamer@paperwidth=12.80cm}}{	% 4:3
 		\begin{textblock*}{7.7cm}(1.9cm,0.5cm)
 			\begin{beamercolorbox}[wd=7.7cm,leftskip=2.6cm,sep=2pt,center,#1]{title page header}
 				\usebeamerfont{title}\textbf{\inserttitle}\par%
-				\usebeamerfont{title}\insertsubtitle\par%
+				\ifx\insertsubtitle\@empty%
+				\else
+					\usebeamerfont{title}\insertsubtitle\par%
+				\fi
 			\end{beamercolorbox}
 		\end{textblock*} 
 		\vfill
@@ -57,16 +63,29 @@
 			\begin{beamercolorbox}[wd=7.7cm,leftskip=2.6cm,sep=2pt,right,#1]{author}
 				\usebeamerfont{author}\insertauthor%
 			\end{beamercolorbox}
+			\ifx\insertinstitute\@empty%
+			\else
+				\begin{beamercolorbox}[wd=7.7cm,leftskip=2.6cm,sep=2pt,right,#1]{institute}
+					\usebeamerfont{institute}\normalsize\insertinstitute%
+				\end{beamercolorbox}
+			\fi
 			\begin{beamercolorbox}[wd=7.7cm,leftskip=2.6cm,sep=2pt,right,#1]{date}
 				\usebeamerfont{date}\insertdate%
 			\end{beamercolorbox}
 		\end{textblock*}
-		\vskip0.25cm
+		\ifthenelse{\equal{\@bottitle}{0}}{
+			\vskip0.5cm
+		}{
+			\vskip\@bottitle cm
+		}
 	}{														% 16:9
 		\begin{textblock*}{11.2cm}(1.7cm,0.5cm)
 			\begin{beamercolorbox}[wd=11.2cm,leftskip=2.6cm,sep=2pt,center,#1]{title page header}
 				\usebeamerfont{title}\textbf{\inserttitle}\par%
-				\usebeamerfont{title}\insertsubtitle\par%
+				\ifx\insertsubtitle\@empty%
+				\else
+					\usebeamerfont{title}\insertsubtitle\par%
+				\fi
 			\end{beamercolorbox}
 		\end{textblock*} 
 		\vfill
@@ -74,11 +93,21 @@
 			\begin{beamercolorbox}[wd=11.2cm,leftskip=2.6cm,sep=2pt,right,#1]{author}
 				\usebeamerfont{author}\insertauthor%
 			\end{beamercolorbox}
+			\ifx\insertinstitute\@empty%
+			\else
+				\begin{beamercolorbox}[wd=11.2cm,leftskip=2.6cm,sep=2pt,right,#1]{institute}
+					\usebeamerfont{institute}\normalsize\insertinstitute%
+				\end{beamercolorbox}
+			\fi
 			\begin{beamercolorbox}[wd=11.2cm,leftskip=2.6cm,sep=2pt,right,#1]{date}
 				\usebeamerfont{date}\insertdate%
 			\end{beamercolorbox}
 		\end{textblock*}
-		\vskip0.45cm
+		\ifthenelse{\equal{\@bottitle}{0}}{
+			\vskip1cm
+		}{
+			\vskip\@bottitle cm
+		}
 	}
 }
 

@@ -32,7 +32,14 @@
 	BoldFont=*-bold,
 	ItalicFont=*-italic,
 	BoldItalicFont=*-bolditalic]
-	\newfontfamily{\cyrillicfonttt}{Courier New}		% Задаёт моноширинный шрифт
+
+	\newfontfamily{\cyrillicfonttt}{CourierNew}[		% Задаёт моноширинный шрифт
+	Path = theme/fonts/,
+	Extension = .ttf,
+	UprightFont = *-regular,
+	BoldFont=*-bold,
+	ItalicFont=*-italic,
+	BoldItalicFont=*-bolditalic]
 
 	% \setmainfont{} 									% Задаёт основной шрифт документа
 	% \newfontfamily{\cyrillicfontsf}{Arial}
@@ -223,7 +230,7 @@
 
 	% Общие настройки
 	\lstset{
-		basicstyle=\tiny\ttfamily,				% Размер и начертание шрифта для подсветки кода
+		basicstyle=\tiny\ttfamily\color{black},	% Размер и начертание шрифта для подсветки кода
 		numbers=left,							% Нумерация строк (слева/справа)
 		numberstyle=\tiny\color{black},			% Размер шрифта для номеров строк	
 		stepnumber=2,							% Шаг между двумя номерами строк
@@ -242,7 +249,7 @@
 		backgroundcolor=\color{lbcolor},		% Цвет фона
 		rulecolor=\color{frameline},			% Цвет рамки
 		xleftmargin=10pt,						% Отступы для рамки
-		xrightmargin=-10pt
+		xrightmargin=5pt
 	}
 
 	% MATLAB
@@ -356,6 +363,12 @@
 	\lstdefinestyle{sh51}{
 		language={[SH51]Assembler},
 		tabsize=8,
+	}
+
+	\lstdefinestyle{shell}{
+		language=bash,
+		morekeywords={ls, touch, mkdir, mv, cp, rm, rmdir, whoami, hostname, cmp, diff, sudo, sed, uniq, sort, cc, gdb, ln, pvcreate, lvcreate, vgcreate, fdisk, lvscan, vgscan, pvscan, pvdisplay, lvdisplay, vgdisplays, mkfs, mount, umount, lvextend, df, resize2fs, fsck, lvreduce, grep, pvmove},
+		deletekeywords={local, test, done, set}
 	}
 
 %% ДОБАВЛЕНИЕ BABEL-LIKE КАВЫЧЕК ДЛЯ POLYGLOSSIA %%
