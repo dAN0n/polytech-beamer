@@ -11,14 +11,17 @@
 				\node[xshift=-17pt,yshift=0pt] at (current page.east){
 					\includegraphics[height=1.015\textheight]{theme/res/titlebgright}
 				};
-				\node[xshift=37pt,yshift=-30pt] at (current page.north){
-				\includegraphics[width=1\textwidth]{theme/res/logo}
+				% \node[xshift=37pt,yshift=-30pt] at (current page.north){
+				% \includegraphics[width=1\textwidth]{theme/res/logo}
+				\node[xshift=37pt,yshift=-30pt,scale=0.45] at (current page.north){
+				\includegraphics[width=1\textwidth]{theme/res/logo_main}
 				};
 			\fi
 			\ifnum\thepage>1\relax%
 				\node[xshift=23pt,yshift=0pt] at (current page.west){
 					\includegraphics[height=1.015\textheight]{theme/res/framebgleft}
 				};
+				\node[xshift=0pt,yshift=1pt] at (current page.south){\progressbar@progressbar};
 			\fi
 		\end{tikzpicture}
 	}{														% 16:9

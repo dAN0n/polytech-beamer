@@ -1,0 +1,29 @@
+\usetikzlibrary{calc}
+\def\progressbar@progressbar{} % the progress bar
+\newcount\progressbar@tmpcounta% auxiliary counter
+\newcount\progressbar@tmpcountb% auxiliary counter
+\newdimen\progressbar@pbht %progressbar height
+\newdimen\progressbar@pbwd %progressbar width
+\newdimen\progressbar@tmpdim % auxiliary dimension
+\progressbar@pbwd=\paperwidth
+\progressbar@pbht=0.5ex
+% the progress bar
+\def\progressbar@progressbar{%
+    \progressbar@tmpcounta= \insertframenumber % max = ?
+    \progressbar@tmpcountb=\inserttotalframenumber      
+    \progressbar@tmpdim=.5\progressbar@pbwd
+    \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+    \divide\progressbar@tmpdim by \progressbar@tmpcountb
+    \progressbar@tmpdim=2\progressbar@tmpdim
+  \begin{tikzpicture}[very thin]
+    \shade[top color=poly-green!20,bottom color=poly-green!20,middle color=poly-green!50]
+      (0pt, 0pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
+      \shade[draw=poly-darker-green,top color=poly-darker-green!50,bottom color=poly-darker-green!50,middle color=poly-darker-green] %
+        (0pt, 0pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
+    \draw[color=normal text.fg!50]
+      (0pt, 0pt) rectangle (\progressbar@pbwd, \progressbar@pbht)
+        node[pos=0.5,color=normal text.fg] {\textnormal{%
+        }%
+    };
+  \end{tikzpicture}%
+}
